@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Portfólio</title>
+
+    <style>
+        :root {
+            --bg: #050509;
+            --bg-alt: #0b0b12;
+            --primary: #6366f1;
+            --primary-soft: rgba(99, 102, 241, 0.15);
+            --text: #f5f5f5;
+            --muted: #9ca3af;
+            --radius: 18px;
+            --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+            background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+            color: var(--text);
+        }
+
+       
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4), transparent);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 22px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.95rem;
+            transition: 0.25s;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        
+        main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+       
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+            gap: 40px;
+            align-items: center;
+            padding: 40px 0 60px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 4vw, 3.2rem);
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(90deg, #6366f1, #a855f7, #22d3ee);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            color: var(--muted);
+            font-size: 1.02rem;
+            max-width: 520px;
+            margin-bottom: 26px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 26px;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            box-shadow: 0 18px 40px rgba(79, 70, 229, 0.45);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 22px 55px rgba(79, 70, 229, 0.6);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--muted);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--primary);
+            color: var(--text);
+        }
+
+       
+        .hero-card {
+            background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.18), transparent 55%),
+                var(--bg-alt);
+            border-radius: 24px;
+            padding: 22px 22px 24px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-name {
+            font-weight: 600;
+        }
+
+        .hero-role {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .hero-status {
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(22, 163, 74, 0.12);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .metric {
+            padding: 10px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .metric-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* SEÇÕES */
+        .section {
+            margin-top: 40px;
+            padding: 26px 22px 24px;
+            border-radius: 22px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+       
+        .about-text {
+            color: var(--muted);
+            font-size: 0.96rem;
+            line-height: 1.6;
+            max-width: 720px;
+        }
+
+       
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+        }
+
+        .skill-card {
+            padding: 12px 12px 14px;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+        }
+
+        .skill-title {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            font-size: 0.78rem;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: rgba(31, 41, 55, 0.9);
+            color: var(--muted);
+        }
+
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .project-card {
+            border-radius: 18px;
+            padding: 14px 14px 16px;
+            background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 55%),
+                rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(55, 65, 81, 0.95);
+            transition: 0.25s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(129, 140, 248, 0.9);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+        }
+
+        .project-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .project-title {
+            margin: 4px 0 6px;
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .project-desc {
+            font-size: 0.86rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .project-techs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 0.78rem;
+        }
+
+        .project-techs span {
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+        }
+
+        /* CONTATO */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+            gap: 20px;
+        }
+
+        .contact-text {
+            font-size: 0.94rem;
+            color: var(--muted);
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .contact-item span {
+            color: var(--muted);
+        }
+
+      
+        footer {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 26px 20px 40px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            border-top: 1px solid rgba(31, 41, 55, 0.9);
+        }
+
+        
+        @media (max-width: 840px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                order: -1;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+
+        .stack-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .stack-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0b0b12;
+        }
+
+        .tech-icons {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        article {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: aparecer 0.8s ease forwards;
+        }
+
+        
+        article:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        article:nth-child(2) {
+            animation-delay: 0.25s;
+        }
+
+        article:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        article:nth-child(4) {
+            animation-delay: 0.55s;
+        }
+
+        @keyframes aparecer {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <div class="logo"><span>K</span>AUAN <span>M</span>OTA</div>
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+      
+        <section class="hero">
+            <div>
+                <h1 class="hero-title">
+                    Construindo interfaces <span>modernas</span> com HTML e CSS.
+                </h1>
+                <p class="hero-subtitle">
+                    Sou o Kauan Mota, focado em criar páginas rápidas, responsivas e com visual profissional.
+                    Busco unir estética, clareza e código bem estruturado em cada projeto.
+                </p>
+
+                <div class="hero-tags">
+                    <div class="tag">Front-end</div>
+                    <div class="tag">HTML &amp; CSS</div>
+                    <div class="tag">Landing Pages</div>
+                    <div class="tag">UI Moderna</div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn-primary">Ver projetos</button>
+                    <button class="btn-ghost">Entrar em contato</button>
+                </div>
+            </div>
+
+            <aside class="hero-card">
+                <div class="hero-card-header">
+                    <div>
+                        <div class="hero-name">Kauan Mota</div>
+                        <div class="hero-role">Desenvolvedor Front-end</div>
+                    </div>
+                    <div class="hero-status">Disponível para projetos</div>
+                </div>
+
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Foco</div>
+                        <div class="metric-value">Interfaces Web</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Stack</div>
+                        <div class="metric-value">HTML &amp; CSS</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Estilo</div>
+                        <div class="metric-value">Moderno / Clean</div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+      
+        <section id="sobre" class="section">
+            <div class="section-header">
+                <div class="section-title">Sobre mim</div>
+                <div class="section-subtitle">Quem é o Kauan por trás do código</div>
+            </div>
+            <p class="about-text">
+                Sou um desenvolvedor em evolução, com foco em HTML e CSS, estudando como criar interfaces
+                bem estruturadas, responsivas e com aparência profissional.
+                Gosto de trabalhar em layouts limpos, com boa hierarquia visual, tipografia organizada
+                e atenção aos detalhes — desde o espaçamento até as microanimações.
+                <br><br>
+                Meu objetivo é construir projetos que possam ser usados como base para trabalhos reais,
+                portfólios e páginas de apresentação, sempre buscando melhorar a cada linha de código.
+            </p>
+            <div class="tech-icons">
+
+
+        </section>
+
+        
+        <section id="habilidades" class="section">
+            <div class="section-header">
+                <div class="section-title">Habilidades</div>
+                <div class="section-subtitle">Tecnologias e áreas que estou desenvolvendo</div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-title">Front-end</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML semântico</span>
+                        <span class="skill-tag">CSS moderno</span>
+                        <span class="skill-tag">Responsividade</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-title">Layout &amp; UI</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Grid &amp; Flexbox</span>
+                        <span class="skill-tag">Landing pages</span>
+                        <span class="skill-tag">Design clean</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-title">Boas práticas</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Organização de código</span>
+                        <span class="skill-tag">Componentização visual</span>
+                        <span class="skill-tag">Atenção a detalhes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="section">
+            <div class="section-header">
+                <div class="section-title">Projetos em destaque</div>
+                <div class="section-subtitle">Exemplos de interfaces que posso construir</div>
+            </div>
+
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-label">Landing Page</div>
+                    <div class="project-title">Página de Startup Tech</div>
+                    <p class="project-desc">
+                        Layout moderno com hero chamativo, cards de serviços e seção de chamada para ação,
+                        focado em conversão.
+                    </p>
+                    <div class="project-techs">
+                        <span>HTML</span>
+                        <span>CSS Grid</span>
+                        <span>UI Moderna</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-label">Portfólio</div>
+                    <div class="project-title">Portfólio Pessoal</div>
+                    <p class="project-desc">
+                        Estrutura completa com seções de sobre, habilidades, projetos e contato,
+                        ideal para apresentar o trabalho.
+                    </p>
+                    <div class="project-techs">
+                        <span>HTML semântico</span>
+                        <span>CSS Responsivo</span>
+                        <span>Design Clean</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-label">Interface</div>
+                    <div class="project-title">Dashboard Simples</div>
+                    <p class="project-desc">
+                        Interface de painel com cards, métricas e organização visual clara,
+                        simulando um sistema web real.
+                    </p>
+                    <div class="project-techs">
+                        <span>Layout de cards</span>
+                        <span>Tipografia</span>
+                        <span>Microinterações</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        
+        <section id="contato" class="section">
+            <div class="section-header">
+                <div class="section-title">Contato</div>
+                <div class="section-subtitle">Vamos tirar uma ideia do papel?</div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-text">
+                    Se você curtiu o estilo dos projetos e quer transformar uma ideia em uma interface
+                    moderna, podemos conversar.
+                    Seja para uma landing page, um portfólio ou uma página de apresentação,
+                    o foco é sempre entregar algo visualmente forte e bem estruturado.
+                </div>
+
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <strong>Email:</strong> <span>kauanmota714@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>GitHub:</strong> <span>github.com/dev.kauan</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Instagram:</strong> <span>@kn.awp</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>© 2026 Kauan Motta. Todos os direitos reservados.</div>
+        <div>Construído com HTML &amp; CSS.</div>
+    </footer>
+
+</body>
+
+</html>
